@@ -19,7 +19,8 @@ public class SampleController {
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate2;
 	
-	private String TOPIC = "test1";
+	private String TOPIC_1 = "topic1";
+	private String TOPIC_2 = "topic2";
 
 	/**
 	 * @param name
@@ -29,7 +30,7 @@ public class SampleController {
 	@GetMapping("publish/json/{name}")
 	public String Post1(@PathVariable("name") String name) {
 		
-		kafkaTemplate.send(TOPIC , new User(name, "TECH"));
+		kafkaTemplate.send(TOPIC_1 , new User(name, "TECH"));
 		
 		return "publish successfully";
 	}
@@ -42,7 +43,7 @@ public class SampleController {
 	@GetMapping("publish/{message}")
 	public String Post2(@PathVariable("message") String message) {
 		
-		kafkaTemplate2.send(TOPIC , message);
+		kafkaTemplate2.send(TOPIC_2 , message);
 		
 		return "publish successfully";
 	}
